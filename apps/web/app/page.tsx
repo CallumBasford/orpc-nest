@@ -2,7 +2,7 @@
 
 import styles from './page.module.css';
 import { orpc } from './client';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const Gradient = ({
@@ -30,6 +30,7 @@ const Gradient = ({
 
 const RootPage = ({ params }: { params: { forTest?: boolean } }) => {
   const [name, setName] = useState<string | undefined>(undefined);
+  const [testName, setTestName] = useState<string | undefined>(undefined);
 
   const { data } = useQuery(
     orpc.hello.queryOptions({
@@ -39,14 +40,37 @@ const RootPage = ({ params }: { params: { forTest?: boolean } }) => {
     }),
   );
 
+  const mutation = useMutation(orpc.test.mutationOptions({}));
+
   return (
     <main className={styles.main}>
-      <h1>{data?.message}</h1>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <div>
+        <h2>Query</h2>
+        <p>{data?.message}</p>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div>
+        <h2>Mutation</h2>
+        <input
+          type="text"
+          value={testName}
+          onChange={(e) => setTestName(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            if (testName) {
+              mutation.mutate({ name: testName });
+            }
+          }}
+        >
+          Test
+        </button>
+        <p>{mutation.data?.join(', ')}</p>
+      </div>
     </main>
   );
 };

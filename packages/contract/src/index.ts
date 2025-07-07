@@ -17,4 +17,11 @@ export const contract = {
         message: z.string(),
       }),
     ),
+  test: oc
+    .route({
+      method: 'POST',
+      path: '/test',
+    })
+    .input(z.object({ name: z.string() }))
+    .output(z.array(z.string())),
 };
