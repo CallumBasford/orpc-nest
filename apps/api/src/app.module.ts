@@ -1,21 +1,30 @@
-import { Module } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common';
 
-import { AppService } from './app.service.js';
-import { AppController } from './app.controller.js';
-import { onError, ORPCModule } from '@orpc/nest';
+import { AppService } from './app.service';
+import { createAppController } from './app.controller';
 
 @Module({
-  imports: [
-    ORPCModule.forRoot({
-      interceptors: [
-        onError((error) => {
-          console.error(error);
-        }),
-      ],
-      eventIteratorKeepAliveInterval: 5000, // 5 seconds
-    }),
-  ],
-  controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  static async forRoot(): Promise<DynamicModule> {
+    const { onError, ORPCModule } = await import('@orpc/nest');
+    const AppController = await createAppController();
+
+    return {
+      module: AppModule,
+      imports: [
+        ORPCModule.forRoot({
+          interceptors: [
+            onError((error) => {
+              console.error(error);
+            }),
+          ],
+          eventIteratorKeepAliveInterval: 5000, // 5 seconds
+        }),
+      ],
+      controllers: [AppController],
+      providers: [AppService],
+    };
+  }
+}
