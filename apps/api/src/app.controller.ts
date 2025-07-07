@@ -1,12 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import { AppService } from './app.service.js';
+import { Implement, implement } from '@orpc/nest';
+import { contract } from '@repo/contract';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Implement(contract.hello)
+  getHello() {
+    return implement(contract.hello).handler(({ input }) => {
+      return {
+        message: this.appService.getHello(input.name),
+      };
+    });
   }
 }

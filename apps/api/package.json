@@ -2,6 +2,7 @@
   "name": "api",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "nest start --watch",
     "build": "nest build",
@@ -18,7 +19,8 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
-    "@repo/api": "workspace:*",
+    "@orpc/nest": "^1.6.6",
+    "@repo/contract": "workspace:*",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
