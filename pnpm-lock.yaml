@@ -39,9 +39,18 @@ importers:
       '@orpc/nest':
         specifier: ^1.6.6
         version: 1.6.6(@nestjs/common@10.3.8)(@nestjs/core@10.3.8)(rxjs@7.8.1)
+      '@orpc/openapi':
+        specifier: ^1.6.6
+        version: 1.6.6
+      '@orpc/zod':
+        specifier: ^1.6.6
+        version: 1.6.6(@orpc/contract@1.6.6)(@orpc/server@1.6.6)(zod@3.25.75)
       '@repo/contract':
         specifier: workspace:*
         version: link:../../packages/contract
+      '@scalar/nestjs-api-reference':
+        specifier: ^0.5.8
+        version: 0.5.8
       reflect-metadata:
         specifier: ^0.2.0
         version: 0.2.2
@@ -1699,6 +1708,25 @@ packages:
       '@tanstack/query-core': 5.81.5
     dev: false
 
+  /@orpc/zod@1.6.6(@orpc/contract@1.6.6)(@orpc/server@1.6.6)(zod@3.25.75):
+    resolution: {integrity: sha512-nR2c2USFcFomvM5WDDP2SxTmf8LXUGB5dmQqN+vsUdr9sJ1XASlWioHH/BjxpSmTofVVhyjnSOyQ2PflTzgFUQ==}
+    peerDependencies:
+      '@orpc/contract': 1.6.6
+      '@orpc/server': 1.6.6
+      zod: '>=3.24.2'
+    dependencies:
+      '@orpc/contract': 1.6.6
+      '@orpc/openapi': 1.6.6
+      '@orpc/server': 1.6.6
+      '@orpc/shared': 1.6.6
+      escape-string-regexp: 5.0.0
+      wildcard-match: 5.1.4
+      zod: 3.25.75
+    transitivePeerDependencies:
+      - crossws
+      - ws
+    dev: false
+
   /@pkgjs/parseargs@0.11.0:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1733,6 +1761,29 @@ packages:
   /@rushstack/eslint-patch@1.5.1:
     resolution: {integrity: sha512-6i/8UoL0P5y4leBIGzvkZdS85RDMG9y1ihZzmTZQ5LdHUYmZ7pKFoj8X0236s3lusPs1Fa5HTQUpwI+UfTcmeA==}
     dev: true
+
+  /@scalar/nestjs-api-reference@0.5.8:
+    resolution: {integrity: sha512-4T1irHSJL/UdbejEn97b5GBq7woImytSV2vWfRXOzU7y63eKuVWzUZVjZ092qrd4nm67//Ak3i6AAM6CSOgPdw==}
+    engines: {node: '>=20'}
+    dependencies:
+      '@scalar/types': 0.2.7
+    dev: false
+
+  /@scalar/openapi-types@0.3.5:
+    resolution: {integrity: sha512-/iTUSJMMHVMIFJngeIjTVtU5lwIMNyEIm25e0XtDV0veW6zmIhLsaH2/nwpIgR1iXVyd/uWMyMrtQW329s3c4w==}
+    engines: {node: '>=20'}
+    dependencies:
+      zod: 3.24.1
+    dev: false
+
+  /@scalar/types@0.2.7:
+    resolution: {integrity: sha512-C4sbkqzCeQWYWaOUIQPdVm6g3FhUkcqpVorArApv7WfCEgVn1KLOOYELFMWwCHim2GnrZblVVUPubf0UXjUcLA==}
+    engines: {node: '>=20'}
+    dependencies:
+      '@scalar/openapi-types': 0.3.5
+      nanoid: 5.1.5
+      zod: 3.24.1
+    dev: false
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -4195,7 +4246,6 @@ packages:
   /escape-string-regexp@5.0.0:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
-    dev: true
 
   /escodegen@2.1.0:
     resolution: {integrity: sha512-2NlIDTwUWJN0mRPQOdtQBzbUHvdGY2P1VXSyU83Q3xKxM7WHX2Ql8dKq782Q9TgQUNOLEzEYu9bzLNj1q88I5w==}
@@ -6804,6 +6854,12 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
 
+  /nanoid@5.1.5:
+    resolution: {integrity: sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
@@ -9198,6 +9254,10 @@ packages:
       isexe: 2.0.0
     dev: true
 
+  /wildcard-match@5.1.4:
+    resolution: {integrity: sha512-wldeCaczs8XXq7hj+5d/F38JE2r7EXgb6WQDM84RVwxy81T/sxB5e9+uZLK9Q9oNz1mlvjut+QtvgaOQFPVq/g==}
+    dev: false
+
   /word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
@@ -9311,6 +9371,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+    dev: false
 
   /zod@3.25.75:
     resolution: {integrity: sha512-OhpzAmVzabPOL6C3A3gpAifqr9MqihV/Msx3gor2b2kviCgcb+HM9SEOpMWwwNp9MRunWnhtAKUoo0AHhjyPPg==}
